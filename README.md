@@ -26,6 +26,10 @@
 ER.dioにてt.timestamps以外は各テーブル事に上から羅列して行き必要な場合は追記で書きます。
 アソシエーションはbelongs_to has_many で表現します。
 
+https://gyazo.com/8cccb2f55e90ce2d583a7e1e89b16e45
+
+画像です。お願い致します。
+
 
 　　　　
 　
