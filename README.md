@@ -70,7 +70,7 @@ DB設計をします。
 | user_id            | integer | null: false, foreign_key: true |
 | product_id         | integer | null: false, foreign_key: true |
 | quantity           | integer |                                |
-| total_price        | decimal | precision: 10, scale: 2        |
+| total_price        | decimal | null: false                           |
 | status             | string  | null: false                    |
 | created_at         | datetime| null: false                    |
 | updated_at         | datetime| null: false                    |
