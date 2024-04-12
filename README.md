@@ -26,9 +26,62 @@
 ER.dioにてt.timestamps以外は各テーブル事に上から羅列して行き必要な場合は追記で書きます。
 アソシエーションはbelongs_to has_many で表現します。
 
-https://gyazo.com/8cccb2f55e90ce2d583a7e1e89b16e45
+DB設計をします。
 
-画像です。お願い致します。
+## users table
+
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| id                 | integer| null: false, primary_key: true|
+| username           | string | null: false |
+| email              | string | null: false, unique: true |
+| password_digest    | string | null: false |
+| created_at         | datetime| null: false |
+| updated_at         | datetime| null: false |
+
+### Association
+
+- has_many :products, dependent: :destroy 
+- has_many :orders, dependent: :destroy    
+
+## products table
+
+| Column             | Type    | Options                        |
+| ------------------ | ------- | ------------------------------ |
+| id                 | integer | null: false, primary_key: true|
+| name               | string  | null: false                    |
+| description        | text    |                                |
+| price              | integer | null: false                    |
+| image_url          | string  |                                |
+| user_id            | integer | null: false, foreign_key: true |
+| created_at         | datetime| null: false                    |
+| updated_at         | datetime| null: false                    |
+
+### Association
+
+- belongs_to :user 
+- has_many :orders, dependent: :destroy 
+
+## orders table
+
+| Column             | Type    | Options                        |
+| ------------------ | ------- | ------------------------------ |
+| id                 | integer | null: false, primary_key: true|
+| user_id            | integer | null: false, foreign_key: true |
+| product_id         | integer | null: false, foreign_key: true |
+| quantity           | integer |                                |
+| total_price        | decimal | precision: 10, scale: 2        |
+| status             | string  | null: false                    |
+| created_at         | datetime| null: false                    |
+| updated_at         | datetime| null: false                    |
+
+### Association
+
+- belongs_to :user    
+- belongs_to :product 
+
+
+
 
 
 　　　　
