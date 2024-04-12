@@ -1,24 +1,32 @@
-# README
+今回フリマアプリのモデリングを行います。初めてなのでご指摘の程よろしくお願いします。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+　　〜DB設計の大まかな概要です。〜
 
-Things you may want to cover:
+　　　　🔸ユーザー管理機能（users table）
+　　　　　・名前登録
+　　　　　・Eメール登録
+　　　　　・パスワード設定
 
-* Ruby version
+　　　　🔸商品出品機能 （products table）
 
-* System dependencies
+　　　　　　・商品名
+　　　　　　・商品説明欄
+　　　　　　・値段
+　　　　　　・商品画像
+　　　　　　・お客様と商品を関連付けるキー
+　　　　
+　　　　🔸商品購入機能 （orders table）
 
-* Configuration
+　　　　　・購入の為にユーザーと関連付けるキー
+　　　　　・出品された物を購入する為のキー
+　　　　　・数量
+　　　　　・総額
+　　　　　・注文
 
-* Database creation
+ER.dioにてt.timestamps以外は各テーブル事に上から羅列して行き必要な場合は追記で書きます。
+アソシエーションはbelongs_to has_many で表現します。
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+　　　　
+　
+　　　　　
