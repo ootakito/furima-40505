@@ -35,7 +35,7 @@ DB設計をします。
 | condition_id         | integer | null: false           |
 | shipping_cost_burden_id | integer | null: false           |
 | shipping_region_id   | integer | null: false           |
-| shipping_duration_id | references  | null: false, foreign_key: true           |
+| shipping_duration_id | integer   | null: false, foreign_key: true           |
 | price                | integer    | null: false           |
 | user                 | references | null: false, foreign_key: true          |
 
@@ -50,7 +50,7 @@ DB設計をします。
 | -------- | ---------- | ------------------------------ |
 | user     | references |  null: false, foreign_key: true |
 | item     | references |  null: false, foreign_key: true |
-| address  | references |   null: false, foreign_key: true |
+
 
 ### Association
 
@@ -68,7 +68,7 @@ DB設計をします。
 | address       | string     | null: false                     |
 | building      | string     |                                 |
 | phone_number  | string     | null: false                     |
-| order         | references | null: false, foreign_key: true  |
+| order         | references | null: false  |
 
 ### Association
 - belongs_to :order
