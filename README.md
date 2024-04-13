@@ -30,60 +30,82 @@ DB設計をします。
 
 ## users table
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| id                 | integer| null: false, primary_key: true|
-| username           | string | null: false |
-| email              | string | null: false, unique: true |
-| password_digest    | string | null: false |
-| created_at         | datetime| null: false |
-| updated_at         | datetime| null: false |
+| Column          | Type    | Options               |
+| --------------- | ------- | --------------------- |
+| nickname        | string  | null: false           |
+| email           | string  | null: false           |
+| password_digest | string  | null: false           |
+| full_name       | string  | null: false           |
+| birthdate       | date    | null: false           |
 
 ### Association
 
-- has_many :products, dependent: :destroy 
+- has_many :items, dependent: :destroy 
 - has_many :orders, dependent: :destroy    
 
-## products table
+## items table
 
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| id                 | integer | null: false, primary_key: true|
-| name               | string  | null: false                    |
-| description        | text    |                                |
-| price              | integer | null: false                    |
-| image_url          | string  |                                |
-| user_id            | integer | null: false, foreign_key: true |
-| created_at         | datetime| null: false                    |
-| updated_at         | datetime| null: false                    |
+| Column               | Type    | Options               |
+| -------------------- | ------- | --------------------- |
+| name                 | string  | null: false           |
+| description          | text    | null: false           |
+| category             | string  | null: false           |
+| condition            | string  | null: false           |
+| shipping_cost_burden | string  | null: false           |
+| shipping_region      | string  | null: false           |
+| shipping_duration    | string  | null: false           |
+| price                | integer | null: false           |
+
 
 ### Association
 
 - belongs_to :user 
-- has_many :orders, dependent: :destroy 
+- has_one :orders, dependent: :destroy 
 
 ## orders table
 
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| id                 | integer | null: false, primary_key: true|
-| user_id            | integer | null: false, foreign_key: true |
-| product_id         | integer | null: false, foreign_key: true |
-| quantity           | integer |                                |
-| total_price        | decimal | null: false                           |
-| status             | string  | null: false                    |
-| created_at         | datetime| null: false                    |
-| updated_at         | datetime| null: false                    |
+| Column          | Type    | Options               |
+| --------------- | ------- | --------------------- |
+| item_name       | string  | null: false           |
+| item_price      | integer | null: false           |
+| shipping_cost   | string  | null: false           |
+| total_price     | integer | null: false           |
+| credit_card_info| string  | null: false           |
+| expiration_date | string  | null: false           |
+| security_code   | string  | null: false           |
+| postal_code     | string  | null: false           |
+| prefecture      | string  | null: false           |
+| city            | string  | null: false           |
+| address         | string  | null: false           |
+| building        | string  |                       |
+| phone_number    | string  | null: false           |
 
 ### Association
 
 - belongs_to :user    
-- belongs_to :product 
+- belongs_to :item
+
+## addresses table
+
+
+| Column       | Type    | Options               |
+| ------------ | ------- | --------------------- |
+| postal_code  | string  | null: false           |
+| prefecture   | string  | null: false           |
+| city         | string  | null: false           |
+| address      | string  | null: false           |
+| building     | string  |                       |
+| phone_number | string  | null: false           |
+| created_at   | datetime| null: false           |
+| updated_at   | datetime| null: false           |
+
+### Association
+- belongs_to :user    
 
 
 
 
 
-　　　　
-　
-　　　　　
+
+
+
