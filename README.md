@@ -37,24 +37,19 @@ DB設計をします。
 | shipping_region_id   | integer | null: false           |
 | shipping_duration_id | integer | null: false           |
 | price                | integer | null: false           |
-
+| user_id              | integer | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user 
-- has_one :orders, dependent: :destroy 
+- has_one :order, dependent: :destroy 
 
 ## orders table
 
 | Column          | Type    | Options               |
 | --------------- | ------- | --------------------- |
-| item_name       | string  | null: false           |
-| item_price      | integer | null: false           |
 | shipping_cost   | string  | null: false           |
 | total_price     | integer | null: false           |
-| credit_card_info| string  | null: false           |
-| expiration_date | string  | null: false           |
-| security_code   | string  | null: false           |
 | postal_code     | string  | null: false           |
 | prefecture      | string  | null: false           |
 | city            | string  | null: false           |
@@ -63,11 +58,13 @@ DB設計をします。
 | phone_number    | string  | null: false           |
 | user_id         | integer | null: false, foreign_key: true |
 | item_id         | integer | null: false, foreign_key: true |
+| address_id      | integer | null: false, foreign_key: true | 
 
 ### Association
 
 - belongs_to :user    
 - belongs_to :item
+- belongs_to :address 
 
 ## addresses table
 
@@ -75,13 +72,13 @@ DB設計をします。
 | Column        | Type    | Options                         |
 | ------------- | ------- | ------------------------------- |
 | postal_code   | string  | null: false                     |
-| prefecture_id | integer | null: false, foreign_key: true  |
+| prefecture_id | integer | null: false                     |
 | city          | string  | null: false                     |
 | address       | string  | null: false                     |
 | building      | string  |                                 |
 | phone_number  | string  | null: false                     |
 | order_id      | integer | null: false, foreign_key: true  |
-
+|               |         | foreign_key: true               |
 
 ### Association
 - belongs_to :order
