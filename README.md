@@ -12,9 +12,12 @@ DB設計をします。
 | Column          | Type    | Options               |
 | --------------- | ------- | --------------------- |
 | nickname        | string  | null: false           |
-| email           | string  | null: false           |
+| last_name       | string  | null: false           |
+| first_name      | string  | null: false           |
+| last_name_kana  | string  | null: false           |
+| first_name_kana | string  | null: false           |
+| email           | string  | null: false   unique: true        |
 | encrypted_password | string  | null: false           |
-| full_name       | string  | null: false           |
 | birthdate       | date    | null: false           |
 
 ### Association
@@ -28,11 +31,11 @@ DB設計をします。
 | -------------------- | ------- | --------------------- |
 | name                 | string  | null: false           |
 | description          | text    | null: false           |
-| category             | string  | null: false           |
-| condition            | string  | null: false           |
-| shipping_cost_burden | string  | null: false           |
-| shipping_region      | string  | null: false           |
-| shipping_duration    | string  | null: false           |
+| category_id          | integer | null: false           |
+| condition_id         | integer | null: false           |
+| shipping_cost_burden_id | integer | null: false           |
+| shipping_region_id   | integer | null: false           |
+| shipping_duration_id | integer | null: false           |
 | price                | integer | null: false           |
 
 
@@ -58,6 +61,8 @@ DB設計をします。
 | address         | string  | null: false           |
 | building        | string  |                       |
 | phone_number    | string  | null: false           |
+| user_id         | integer | null: false, foreign_key: true |
+| item_id         | integer | null: false, foreign_key: true |
 
 ### Association
 
@@ -67,18 +72,19 @@ DB設計をします。
 ## addresses table
 
 
-| Column       | Type    | Options               |
-| ------------ | ------- | --------------------- |
-| postal_code  | string  | null: false           |
-| prefecture   | string  | null: false           |
-| city         | string  | null: false           |
-| address      | string  | null: false           |
-| building     | string  |                       |
-| phone_number | string  | null: false           |
+| Column        | Type    | Options                         |
+| ------------- | ------- | ------------------------------- |
+| postal_code   | string  | null: false                     |
+| prefecture_id | integer | null: false, foreign_key: true  |
+| city          | string  | null: false                     |
+| address       | string  | null: false                     |
+| building      | string  |                                 |
+| phone_number  | string  | null: false                     |
+| order_id      | integer | null: false, foreign_key: true  |
 
 
 ### Association
-- belongs_to :user    
+- belongs_to :order
 
 
 
