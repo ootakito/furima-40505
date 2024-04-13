@@ -34,8 +34,8 @@ DB設計をします。
 | category_id          | integer | null: false           |
 | condition_id         | integer | null: false           |
 | shipping_cost_burden_id | integer | null: false           |
-| shipping_region_id   | integer | null: false           |
-| shipping_duration_id | integer   | null: false, foreign_key: true           |
+| prefecture_id    | integer | null: false           |
+| shipping_duration_id | integer   | null: false          |
 | price                | integer    | null: false           |
 | user                 | references | null: false, foreign_key: true          |
 
@@ -63,12 +63,12 @@ DB設計をします。
 | Column        | Type       | Options                         |
 | ------------- | ---------- | ------------------------------- |
 | postal_code   | string     | null: false                     |
-| prefecture_id | integer    | null: false, foreign_key: true  |
+| prefecture_id | integer    | null: false  |
 | city          | string     | null: false                     |
 | address       | string     | null: false                     |
 | building      | string     |                                 |
 | phone_number  | string     | null: false                     |
-| order         | references | null: false  |
+| order         | references | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :order
