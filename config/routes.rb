@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  # Deviseのルート
   devise_for :users
+  # Deviseのルート
 
   # トップページへのルート
   root to: "items#index"
