@@ -1,57 +1,28 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :redirect_unless_owner, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create] # ユーザーがログインしていることを保証
 
   def index
     @items = Item.all
   end
 
-  def show
-    # コメントやその他の関連情報もここでロードする場合
-  end
-
   def new
-    @item = Item.new
+    @item = Item.new # 新しいItemインスタンスを作成し、フォーム用に@item変数に割り当てる
   end
 
   def create
-    @item = current_user.items.build(item_params)
-    if @item.save
-      redirect_to root_path
+    @item = current_user.items.build(item_params) # ログインユーザーに紐づけて新しい商品を構築
+    if @item.save # 商品の情報がバリデーションを通過し、データベースに保存された場合
+      redirect_to root_path # トップページにリダイレクト
     else
-      render :new
+      render :new # 商品情報がバリデーションを通過しない場合は、newビューを再描画
     end
-  end
-
-  def edit
-  end
-
-  def update
-    if @item.update(item_params)
-      redirect_to root_path
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @item.destroy
-    redirect_to root_path
   end
 
   private
 
   def item_params
+    # Strong Parametersを使用し、安全にパラメータを取得
     params.require(:item).permit(:name, :description, :image, :category_id, :condition_id, :shipping_cost_burden_id,
                                  :prefecture_id, :shipping_duration_id, :price)
-  end
-
-  def set_item
-    @item = Item.find(params[:id])
-  end
-
-  def redirect_unless_owner
-    redirect_to root_path unless current_user == @item.user
   end
 end
