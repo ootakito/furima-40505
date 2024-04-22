@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create] # ユーザーがログインしていることを保証
 
-  # def index
-  # @items = Item.all
-  # end
+  def index
+    @items = Item.all
+  end
 
   def new
     @item = Item.new # 新しいItemインスタンスを作成し、フォーム用に@item変数に割り当てる
