@@ -10,11 +10,13 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = current_user.items.build(item_params) # ログインユーザーに紐づけて新しい商品を構築
+    @item = Item.new(item_params) # 新しい商品インスタンスを作成
+    @item.user_id = current_user.id # ログインユーザーに紐づける
+
     if @item.save # 商品の情報がバリデーションを通過し、データベースに保存された場合
       redirect_to root_path # トップページにリダイレクト
     else
-      render :new # 商品情報がバリデーションを通過しない場合は、newビューを再描画
+      render :new, status: :unprocessable_entity
     end
   end
 
