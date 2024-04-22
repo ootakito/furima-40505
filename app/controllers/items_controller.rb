@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create] # ユーザーがログインしていることを保証
 
   def index
-    @items = Item.all
+    @items = Item.all.order(created_at: :desc)
   end
 
   def new
