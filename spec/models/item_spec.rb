@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @user = FactoryBot.create(:user)
-    @item = FactoryBot.build(:item) # テスト用のItemインスタンスを初期化
+    @item = FactoryBot.build(:item, user: @user)
   end
 
   context '有効な場合' do
@@ -71,6 +71,24 @@ RSpec.describe Item, type: :model do
       @item.image.detach # 画像をデタッチしてテスト
       @item.valid?
       expect(@item.errors[:image]).to include("can't be blank")
+    end
+
+    it '商品説明が空だと登録できない' do
+      @item.description = nil
+      @item.valid?
+      expect(@item.errors[:description]).to include("can't be blank")
+    end
+
+    it '価格が空だと登録できない' do
+      @item.price = nil
+      @item.valid?
+      expect(@item.errors[:price]).to include("can't be blank")
+    end
+
+    it 'userが紐付いていなければ登録できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors[:user]).to include('must exist')
     end
   end
 end
