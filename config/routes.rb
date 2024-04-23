@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  # Itemsに関するルートを限定的に設定
-  resources :items, only: [:index, :new, :create, :show, :edit, :update] do
+  resources :items, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     # 必要に応じてネストされたリソースや追加ルートをここに配置
   end
 
