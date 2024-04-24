@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   def create
     @order = OrderAddress.new(order_params)
     if @order.valid?
-      pay_item # ここでPAY.JPの処理を呼び出すなどの決済処理を行う
+      # pay_item # ここでPAY.JPの処理を呼び出すなどの決済処理を行う
       @order.save
       redirect_to root_path
     else
