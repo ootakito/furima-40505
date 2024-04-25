@@ -22,31 +22,31 @@ RSpec.describe Item, type: :model do
     it 'カテゴリーが「---」だと登録できない' do
       @item.category_id = 1
       @item.valid?
-      expect(@item.errors[:category_id]).to include('must be other than 1')
+      expect(@item.errors[:category_id]).to include("can't be blank")
     end
 
     it '商品の状態が「---」だと登録できない' do
       @item.condition_id = 1
       @item.valid?
-      expect(@item.errors[:condition_id]).to include('must be other than 1')
+      expect(@item.errors[:condition_id]).to include("can't be blank")
     end
 
     it '送料負担が「---」だと登録できない' do
       @item.shipping_cost_burden_id = 1
       @item.valid?
-      expect(@item.errors[:shipping_cost_burden_id]).to include('must be other than 1')
+      expect(@item.errors[:shipping_cost_burden_id]).to include("can't be blank")
     end
 
     it '発送元の地域が「---」だと登録できない' do
       @item.prefecture_id = 1
       @item.valid?
-      expect(@item.errors[:prefecture_id]).to include('must be other than 1')
+      expect(@item.errors[:prefecture_id]).to include("can't be blank")
     end
 
     it '発送までの日数が「---」だと登録できない' do
       @item.shipping_duration_id = 1
       @item.valid?
-      expect(@item.errors[:shipping_duration_id]).to include('must be other than 1')
+      expect(@item.errors[:shipping_duration_id]).to include("can't be blank")
     end
 
     it '価格が¥300未満の場合登録できない' do

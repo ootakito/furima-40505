@@ -18,42 +18,49 @@ RSpec.describe OrderAddress, type: :model do
       it '郵便番号が空だと保存できないこと' do
         @order_address.postal_code = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postal code can't be blank")
+        expect(@order_address.errors[:postal_code]).to include("can't be blank")
       end
 
       it '郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと' do
         @order_address.postal_code = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Postal code is invalid')
+        expect(@order_address.errors[:postal_code]).to include('is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
       it '都道府県IDが「---」だと登録できない' do
         order_address = OrderAddress.new(prefecture_id: 1)
         order_address.valid?
-        expect(order_address.errors[:prefecture_id]).to include('must be other than 1')
+        expect(order_address.errors[:prefecture_id]).to include("can't be blank")
       end
+
       it '市区町村が空だと保存できないこと' do
         @order_address.city = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("City can't be blank")
+        expect(@order_address.errors[:city]).to include("can't be blank")
       end
 
       it '番地が空だと保存できないこと' do
         @order_address.address = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Address can't be blank")
+        expect(@order_address.errors[:address]).to include("can't be blank")
       end
 
       it '電話番号が空だと保存できないこと' do
         @order_address.phone_number = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
+        expect(@order_address.errors[:phone_number]).to include("can't be blank")
       end
 
       it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
         @order_address.phone_number = '090-1234-5678'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+        expect(@order_address.errors[:phone_number]).to include('is invalid. Input only number')
+      end
+
+      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
+        @order_address.phone_number = '090123456'
+        @order_address.valid?
+        expect(@order_address.errors[:phone_number]).to include('is too short')
       end
     end
   end
