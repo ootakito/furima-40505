@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :phone_number, :token
+  attr_accessor :user_id, :item_id, :postal_code, :building, :prefecture_id, :city, :address, :phone_number # , :token
 
   # 共通バリデーション
   with_options presence: true do
@@ -11,7 +11,7 @@ class OrderAddress
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A\d{10,11}\z/ }
-    validates :token # トークンはクレジット決済のために必須
+    # validates :token # トークンはクレジット決済のために必須
   end
 
   def save
