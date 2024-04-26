@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :building, :prefecture_id, :city, :address, :phone_number
+  attr_accessor :user_id, :item_id, :postal_code, :building, :prefecture_id, :city, :address, :phone_number, :token
 
   with_options presence: true do
     validates :user_id
@@ -27,7 +27,6 @@ class OrderAddress
         phone_number:
       )
     end
-
     true
   rescue ActiveRecord::RecordInvalid
     false
