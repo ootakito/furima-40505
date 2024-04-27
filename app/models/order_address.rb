@@ -3,6 +3,7 @@ class OrderAddress
   attr_accessor :user_id, :item_id, :postal_code, :building, :prefecture_id, :city, :address, :phone_number, :token
 
   with_options presence: true do
+    validates :token, presence: true
     validates :user_id
     validates :item_id
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
