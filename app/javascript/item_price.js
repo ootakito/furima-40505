@@ -1,4 +1,4 @@
-window.onload = function() {
+function post (){
     const priceInput = document.getElementById("item-price");
     const addTaxPrice = document.getElementById("add-tax-price");
     const profitElement = document.getElementById("profit");
@@ -16,3 +16,4 @@ window.onload = function() {
       }
   });
 };
+window.addEventListener('turbo:load', post);
