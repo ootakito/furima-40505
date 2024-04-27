@@ -17,4 +17,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_cost_burden
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_duration
+  def sold?
+    order.present?
+  end
 end
