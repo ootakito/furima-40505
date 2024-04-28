@@ -43,6 +43,8 @@ class OrdersController < ApplicationController
   end
 
   def redirect_if_seller
-    redirect_to root_path if @item.user_id == current_user.id
+    return unless @item.user_id == current_user.id || @item.sold?
+
+    redirect_to root_path
   end
 end
