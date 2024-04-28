@@ -21,11 +21,13 @@ class OrderAddress
       order = Order.create!(user_id:, item_id:)
       Address.create!(
         order_id: order.id,
+        order_id: order.id,
         postal_code:,
         prefecture_id:,
         city:,
         address:,
-        phone_number:
+        phone_number:,
+        building:
       )
     end
     true

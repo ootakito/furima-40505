@@ -17,7 +17,7 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.building = ''
         expect(@order_address).to be_valid
       end
-    end # '有効な情報の場合' の context の終わり
+    end
 
     context '無効な情報の場合' do
       it '郵便番号が空だと保存できないこと' do
