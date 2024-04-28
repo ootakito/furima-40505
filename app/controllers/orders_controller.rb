@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!
+  before_action :redirect_if_seller, only: [:index, :create]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -10,7 +11,7 @@ class OrdersController < ApplicationController
   def create
     @order = OrderAddress.new(order_params)
     if @order.valid?
-      pay_item # ここでPAY.JPの処理を呼び出すなどの決済処理を行う
+      pay_item # PAY.JPの決済処理を呼び出す
       @order.save
       redirect_to root_path
     else
@@ -39,5 +40,9 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def redirect_if_seller
+    redirect_to root_path if @item.user_id == current_user.id
   end
 end

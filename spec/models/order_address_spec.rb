@@ -72,7 +72,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors[:phone_number]).to include("can't be blank")
       end
 
-      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと（11桁です。）' do
+      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
         @order_address.phone_number = '090-1234-56'
         @order_address.valid?
         expect(@order_address.errors[:phone_number]).to include('is invalid. Input only number')
