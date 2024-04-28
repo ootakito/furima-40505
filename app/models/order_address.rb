@@ -11,7 +11,7 @@ class OrderAddress
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number' },
-                             length: { minimum: 10, message: 'is too short' }
+                             length: { in: 10..11, too_short: 'is too short', too_long: 'is too long' }
   end
 
   def save

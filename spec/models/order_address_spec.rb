@@ -25,7 +25,11 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it 'すべての値が正しく入力されていれば保存できること' do
-        puts @order_address.token # ここでtokenの値を出力
+        expect(@order_address).to be_valid
+      end
+
+      it '建物名が空でも保存できること' do
+        @order_address.building = ''
         expect(@order_address).to be_valid
       end
     end
@@ -36,6 +40,7 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors[:postal_code]).to include("can't be blank")
       end
+
       it 'tokenが空では登録できないこと' do
         @order_address.token = nil
         @order_address.valid?
@@ -49,9 +54,9 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it '都道府県IDが「---」だと登録できない' do
-        order_address = OrderAddress.new(prefecture_id: 1)
-        order_address.valid?
-        expect(order_address.errors[:prefecture_id]).to include("can't be blank")
+        @order_address.prefecture_id = 1
+        @order_address.valid?
+        expect(@order_address.errors[:prefecture_id]).to include("can't be blank")
       end
 
       it '市区町村が空だと保存できないこと' do
@@ -82,6 +87,24 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone_number = '090123456'
         @order_address.valid?
         expect(@order_address.errors[:phone_number]).to include('is too short')
+      end
+
+      it '電話番号が12桁以上では保存できないこと' do
+        @order_address.phone_number = '0901234567890'
+        @order_address.valid?
+        expect(@order_address.errors[:phone_number]).to include('is too long')
+      end
+
+      it 'ユーザーが紐づいていない場合は保存できないこと' do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors[:user_id]).to include("can't be blank")
+      end
+
+      it '商品が紐づいていない場合は保存できないこと' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors[:item_id]).to include("can't be blank")
       end
     end
   end
