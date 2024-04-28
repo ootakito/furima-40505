@@ -3,27 +3,12 @@ require 'rails_helper'
 RSpec.describe OrderAddress, type: :model do
   before do
     @user = FactoryBot.create(:user)
-    @item = FactoryBot.build(:item, user: @user)
+    @item = FactoryBot.create(:item, user: @user)
     @order_address = FactoryBot.build(:order_address, user_id: @user.id, item_id: @item.id, token: 'tok_valid00000000000000000')
   end
 
   describe '注文と住所の保存' do
     context '有効な情報の場合' do
-      before do
-        @user = FactoryBot.create(:user)
-        @item = FactoryBot.create(:item, name: 'テストアイテム', price: 1000)
-        @order_address = OrderAddress.new(
-          user_id: @user.id,
-          item_id: @item.id,
-          postal_code: '123-4567',
-          prefecture_id: 2,
-          city: '東京都',
-          address: '中央区1-1-1',
-          phone_number: '09012345678',
-          token: 'tok_sample1234567890'
-        )
-      end
-
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_address).to be_valid
       end
@@ -32,7 +17,7 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.building = ''
         expect(@order_address).to be_valid
       end
-    end
+    end # '有効な情報の場合' の context の終わり
 
     context '無効な情報の場合' do
       it '郵便番号が空だと保存できないこと' do
