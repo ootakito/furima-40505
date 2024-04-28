@@ -4,7 +4,7 @@ RSpec.describe OrderAddress, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.build(:item, user: @user)
-    @order_address = FactoryBot.build(:order_address, user_id: @user.id, item_id: @item.id)
+    @order_address = FactoryBot.build(:order_address, user_id: @user.id, item_id: @item.id, token: 'tok_valid00000000000000000')
   end
 
   describe '注文と住所の保存' do
@@ -19,11 +19,13 @@ RSpec.describe OrderAddress, type: :model do
           prefecture_id: 2,
           city: '東京都',
           address: '中央区1-1-1',
-          phone_number: '09012345678'
+          phone_number: '09012345678',
+          token: 'tok_sample1234567890'
         )
       end
 
       it 'すべての値が正しく入力されていれば保存できること' do
+        puts @order_address.token # ここでtokenの値を出力
         expect(@order_address).to be_valid
       end
     end
@@ -33,6 +35,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.postal_code = ''
         @order_address.valid?
         expect(@order_address.errors[:postal_code]).to include("can't be blank")
+      end
+      it 'tokenが空では登録できないこと' do
+        @order_address.token = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
 
       it '郵便番号は、「3桁ハイフン4桁」の半角文字列のみ保存可能なこと' do
